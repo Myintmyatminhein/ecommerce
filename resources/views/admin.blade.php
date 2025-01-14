@@ -1,10 +1,16 @@
+@php
+use App\Models\Product;
+@endphp
 <x-adminlayout>
+
 <main>
-  
+
+
           <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 bg-gray-50">
             <div
               class="relative border border-gray-300 bg-white rounded-md shadow-sm shadow-gray-200 px-5 py-3"
             >
+           @if(Gate::allows('manage',Product::class))
               <div class="flex justify-end mb-3">
                 <a
                   class="text-sm px-4 flex items-center gap-3 shadow-md py-3 text-white bg-primary hover:bg-blue-900 font-semibold rounded-md transition-all active:animate-press"
@@ -13,6 +19,7 @@
                   Create
                 </a>
               </div>
+              @endif
               <div
                 class="relative flex flex-col min-w-0 break-words w-full mb-6 rounded-md overflow-hidden border"
               >
@@ -41,9 +48,11 @@
                         <th scope="col" class="px-6 py-3 min-w-[100px]">
                           <span class="capitalize p-1.5"> Description </span>
                         </th>
+                        @if(Gate::allows('manage',Product::class))
                         <th scope="col" class="px-6 py-3 min-w-[100px]">
-                          <span class="capitalize p-1.5"> Actions </span>
-                        </th>
+                            <span class="capitalize p-1.5"> Actions </span>
+                          </th>
+                        @endif
                       </tr>
                     </thead>
                     <tbody>
@@ -87,7 +96,8 @@
                           </span>
                         </td>
                         <td class="px-6 py-4">
-                          <div
+                        @if(Gate::allows('manage', $product))
+                            <div
                             class="space-x-3 flex items-center min-w-[200px] w-auto max-w-[500px]"
                           >
                             <a
@@ -105,8 +115,10 @@
                                   d="M5 19h1.425L16.2 9.225L14.775 7.8L5 17.575zm-2 2v-4.25L16.2 3.575q.3-.275.663-.425t.762-.15t.775.15t.65.45L20.425 5q.3.275.438.65T21 6.4q0 .4-.137.763t-.438.662L7.25 21zM19 6.4L17.6 5zm-3.525 2.125l-.7-.725L16.2 9.225z"
                                 />
                               </svg>
-                              Edit
+                              Edit  
                             </a>
+                            @endif
+                            @if(Gate::allows('manage',Product::class))
                             <form action="{{route('products.destroy' , $product->id)}}" method="POST">
 
                             @method('DELETE')
@@ -131,6 +143,7 @@
                             </button>
                             </form>
                           </div>
+                          @endif
                         </td>
                       </tr>
                       @endforeach

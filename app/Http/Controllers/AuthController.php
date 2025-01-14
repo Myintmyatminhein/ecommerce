@@ -23,6 +23,9 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
         if(auth()->attempt(request(['email','password']))){
+            if(auth()->user()->isAdmin() || auth()->user()->isAccountant()){
+                return redirect('/admin/products');
+            }
             return redirect('/');
         }else{
             return back()->withErrors([

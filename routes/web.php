@@ -24,9 +24,7 @@ Route::post('/logout',[AuthController::class, 'destory']);
 Route::get('/login',[AuthController::class, 'loginform'])->name('login');
 Route::post('/login',[AuthController::class, 'loginstore']);
 Route::get('/admin/orders',[OrderController::class, 'adminOrder'])->middleware(MustBeAdmin::class);
-Route::delete('/admin/orders/{order}',[OrderController::class, 'destroy'])->middleware(MustBeAdmin::class)->name('orders.destroy');
-Route::get('/admin/orders/{order}/edit',[OrderController::class, 'edit'])->middleware(MustBeAdmin::class)->name('orders.edit');
-Route::put('/admin/orders/{order}/update',[OrderController::class, 'update'])->middleware(MustBeAdmin::class)->name('orders.update');
+
 Route::middleware(MustBeAdmin::class)->resource('/admin/products',AdminProductController::class);
         // ->prefix('/admin/products')
         // ->controller(AdminProductController::class)
@@ -38,7 +36,9 @@ Route::middleware(MustBeAdmin::class)->resource('/admin/products',AdminProductCo
         // Route::get('/{product}/edit', 'edit');
         // Route::put('/{product}', 'update');
         // });
-
+ Route::delete('/admin/orders/{order}',[OrderController::class, 'destroy'])->middleware(MustBeAdmin::class)->name('orders.destroy');
+ Route::get('/admin/orders/{order}/edit',[OrderController::class, 'edit'])->middleware(MustBeAdmin::class)->name('orders.edit');
+ Route::put('/admin/orders/{order}/update',[OrderController::class, 'update'])->middleware(MustBeAdmin::class)->name('orders.update');
 Route::get('/productCreate', function () {
     return view('productCreate');
 }); 

@@ -18,7 +18,7 @@ class MustBeAdmin
         if(!auth()->check()){
             abort(403);
         }
-        if(!auth()->user()->is_admin){
+        if(!auth()->user()->isAdmin() && !auth()->user()->isAccountant()){
             abort(403);
         }
         return $next($request);

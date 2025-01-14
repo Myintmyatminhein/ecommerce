@@ -10,17 +10,25 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
-class AdminProductController extends Controller
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+
+class AdminProductController extends Controller implements HasMiddleware
 {
+    public static function middleware():array{
+        return [new Middleware('can:manage, product', except:['index', 'create', 'store','destroy','update','edit'])];
+    }
 
     public function index (){
         $products = Product::with('category')->orderBy('created_at','desc')->get(); 
         return view('admin', ['products'=> $products]);
     }
 
-
-
     public function create(){
+        if(!auth()->user()->can('manage',Product::class)){
+            abort(403);
+
+        }
         return view ('productCreate', ['categories'=> Category::all()]);
     }
 
@@ -51,7 +59,6 @@ class AdminProductController extends Controller
 
 
     public function update(Product $product , ProductRequest $request){
-
         $product->name = $request->name; 
         $product->price = $request->price;  
         $product->description = $request->description;  
@@ -64,6 +71,10 @@ class AdminProductController extends Controller
 
 
     public function edit(Product $product){
+        if(!auth()->user()->can('manage',Product::class)){
+            abort(403);
+
+        }
         return view('edit',['categories'=> Category::all(), 'product'=> $product]);
     }
 }

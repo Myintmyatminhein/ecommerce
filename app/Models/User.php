@@ -46,6 +46,10 @@ class User extends Authenticatable
         ];
     }
 
+    public function role(){
+        return $this->belongsTo(Role::class);
+    }
+
     // a user belongsToMany cartProducts
     public function cartProducts(){
                 return $this->belongsToMany(Product::class, 'carts' )->withPivot("quantity");
@@ -69,5 +73,12 @@ class User extends Authenticatable
     // a user hasMany Orders
     public function orders(){
         return $this->hasMany(Order::class);
+    }
+
+    public function isAdmin(){
+        return $this->role_id == 1;
+    }
+    public function isAccountant(){
+        return $this->role_id == 3; 
     }
 }

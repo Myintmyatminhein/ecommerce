@@ -2,7 +2,7 @@
 <div class="cursor-pointer">
               <a href="/products/{{$product->id}}">
                 <div
-                  class="w-full h-auto bg-[#F7F8F9] group rounded-xl overflow-hidden"
+                  class="w-full h-full bg-[#F7F8F9] group rounded-xl overflow-hidden"
                 >
                   <img
                     class="w-full h-full group-hover:scale-[1.1] transition-all duration-200"
