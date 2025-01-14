@@ -11,7 +11,7 @@
            
             <div class="border p-10 bg-white rounded-md">
             <h1 class="font-bold my-3 text-3xl">Product {{$type == "create" ? "Create": "Edit"}} Form</h1>
-              <form class="space-y-4 md:space-y-6" method="POST" 
+              <form enctype="multipart/form-data" class="space-y-4 md:space-y-6" method="POST" 
               action="{{$type == 'create' ? route('products.store') : route ('products.update',$product->id)}}">
                 @csrf
                 @if ($type == 'edit')
@@ -20,7 +20,10 @@
                
                 <div class="">
                   <div class="image-wrapper">
-                    <input type="file" />
+                    <input accept="image/*" type="file" name="photo" />
+                    @error('photo')
+                    <p class="text-red-500 my-3 text-sm">{{$message}}</p>
+                    @enderror
                   </div>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5">

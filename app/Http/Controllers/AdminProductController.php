@@ -24,9 +24,10 @@ class AdminProductController extends Controller
 
 
     public function store(ProductRequest $request){
-  
+        $path = '/storage/'.request('photo')->store('products');
        $product =new Product();
        $product->name = $request->name; 
+       $product->photo = $path;
        $product->price = $request->price;  
        $product->description = $request->description;  
        $product->category_id = $request->category_id;

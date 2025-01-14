@@ -6,7 +6,7 @@
                 >
                   <img
                     class="w-full h-full group-hover:scale-[1.1] transition-all duration-200"
-                    src="https://cdn.prod.website-files.com/62f51a90d298e65b94bbffcd/62f6a67c4666f047ada3ba87_image-10-shop-product-shopwave-template-p-500.png"
+                    src="{{$product->photo}}" 
                   />
                 </div>
                 <p class="mt-3 font-semibold">{{$product->name}}</p>

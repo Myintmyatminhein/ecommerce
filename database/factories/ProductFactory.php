@@ -21,6 +21,7 @@ class ProductFactory extends Factory
             "name" =>fake()->word(),
             "description"=>fake()->word(),
             "price"=>fake()->numberBetween(100,1000),
+            "photo"=>fake()->imageUrl(),
             "category_id"=>Category::factory(),
 
         ];

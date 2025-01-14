@@ -4,7 +4,7 @@
                 >
                   <div class="w-full lg:w-full basis-[40%] overflow-hidden">
                     <img
-                      src="https://cdn.prod.website-files.com/62f51a90d298e65b94bbffcd/62f6a67c4666f047ada3ba87_image-10-shop-product-shopwave-template-p-500.png"
+                   src="{{$latestproduct->photo}}"
                       class="w-full h-full object-cover group-hover:scale-[1.1] transition-all duration-200"
                     />
                   </div>

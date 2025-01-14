@@ -57,7 +57,7 @@
                         <td class="px-6 py-4">
                           <span class="text-darkGray p-1.5 font-semibold block">
                             <img
-                              src="https://cdn.prod.website-files.com/62f51a90d298e65b94bbffcd/62f6a67c4666f047ada3ba87_image-10-shop-product-shopwave-template-p-500.png"
+                           src="{{$product->photo}}"
                               alt="Product Image"
                               class="w-16 h-16 object-cover"
                             />
