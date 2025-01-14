@@ -6,7 +6,7 @@
                 >
                   <img
                     class="w-full h-full group-hover:scale-[1.1] transition-all duration-200"
-                    src="{{$product->photo}}" 
+                    src="{{$product->photo}}"   
                   />
                 </div>
                 <p class="mt-3 font-semibold">{{$product->name}}</p>

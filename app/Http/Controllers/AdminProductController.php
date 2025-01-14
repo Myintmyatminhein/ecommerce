@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
+use App\Mail\ProductCreatedMail;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Queue;
 class AdminProductController extends Controller
 {
 
     public function index (){
-        $products = Product::orderBy('created_at','desc')->get(); 
+        $products = Product::with('category')->orderBy('created_at','desc')->get(); 
         return view('admin', ['products'=> $products]);
     }
 
@@ -33,6 +36,10 @@ class AdminProductController extends Controller
        $product->category_id = $request->category_id;
        $product->save();
 
+        $users = User::all();
+        $users->each(function($user) use ($product){
+             Mail::to($user->email)->queue(new ProductCreatedMail($product, $user->name));
+        }); 
       return redirect('/admin/products');
     }
 
