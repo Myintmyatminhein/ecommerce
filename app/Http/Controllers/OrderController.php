@@ -10,6 +10,7 @@ class OrderController extends Controller
     public function store(){
             request()->validate([
                 'name' => 'required',
+
                 'phone' => 'required',
                 'shipping_address' => 'required',
                 'screenshot' => 'required|image',
@@ -49,5 +50,21 @@ class OrderController extends Controller
         ]);
     
 }
+    public function adminOrder(){
+        return view('admin.orders.index', [
+            'orders' => Order::latest()->paginate(10)
+        ]);
+    }
+
+    public function destroy(Order $order){
+        $order->delete();
+        return redirect('/admin/orders');
+    }   
+
+    public function edit(Order $order){
+        return view('admin.orders.edit', [
+            'order' => $order
+        ]);
+    }
 
 }
