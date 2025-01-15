@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -24,6 +25,13 @@ Route::post('/logout',[AuthController::class, 'destory']);
 Route::get('/login',[AuthController::class, 'loginform'])->name('login');
 Route::post('/login',[AuthController::class, 'loginstore']);
 Route::get('/admin/orders',[OrderController::class, 'adminOrder'])->middleware(MustBeAdmin::class);
+
+Route::middleware(MustBeAdmin::class)->resource('/admin/categories',CategoryController::class);
+
+
+
+
+
 
 Route::middleware(MustBeAdmin::class)->resource('/admin/products',AdminProductController::class);
         // ->prefix('/admin/products')
